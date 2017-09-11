@@ -2,10 +2,16 @@
  * Created by daixi on 2017/9/10.
  */
 const path = require('path');
+const fs = require('fs');
 require('dotenv').config({ path: path.resolve(__dirname, '..', '.env') })
 
+const imagedir = path.join(__dirname, 'images');
+
+if (!fs.existsSync(imagedir)) fs.mkdirSync(imagedir);
+
+
 module.exports = {
-    imagedir: path.join(__dirname, 'images'),
+    imagedir,
     db: {
         host: process.env.LOCAL_DB_HOST || '127.0.0.1',
         port: process.env.LOCAL_DB_PORT || 3306,

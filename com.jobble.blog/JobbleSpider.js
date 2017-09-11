@@ -43,7 +43,7 @@ class JobbleSpider {
                 this.running--;
                 if (err) {
                     log.error(`${url}=>${err}`);
-                    this.failedUrls.add(url);
+                    this.urls.set(url, item);
                 } else if (response.statusCode !== 200) {
                     log.error(`${url}=>statusCode=${response.statusCode}`);
                     this.failedUrls.add(url);
@@ -85,6 +85,11 @@ class JobbleSpider {
     }
 
     parse(response) {
+        let new_url = response.cheerio('.next.page-numbers').attr('href');
+        if (new_url) {
+            this.urls.set(new_url, { fn: this.parse });
+        }
+
         let nodes = response.cheerio('#archive .post-thumb a');
         nodes.each((i, el) => {
             let baseUrl = response.url;
@@ -94,11 +99,6 @@ class JobbleSpider {
             imgUrl = urlLib.resolve(baseUrl, imgUrl);
             this.add(postUrl, { fn: this.parseDetail, meta: { imgUrl } })
         });
-
-        let new_url = response.cheerio('.next.page-numbers').attr('href');
-        if (new_url) {
-            this.urls.set(new_url, { fn: this.parse });
-        }
     }
 
     parseDetail(response) {
