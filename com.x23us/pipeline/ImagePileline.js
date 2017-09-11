@@ -11,9 +11,7 @@ const config = require('../config');
 
 class ImagePileline {
     async process_item(item) {
-
-        item.front_img_path = this.downloadImage(item.front_img_url);
-        // item.front_img_path = '';
+        item.image_path = this.downloadImage(item.image_url);
         return item;
     }
 

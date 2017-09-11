@@ -8,7 +8,7 @@ class response {
     constructor(html, url) {
         this.body = html;
         this.url = url;
-        this.cheerio = cheerio.load(htmlparser2.parseDOM(html));
+        this.cheerio = cheerio.load(htmlparser2.parseDOM(html), {decodeEntities: false});
     }
 }
 

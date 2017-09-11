@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : aliyun_hk
-Source Server Version : 50719
-Source Host           : hk.immooc.xyz:3389
+Source Server         : localhost_3306
+Source Server Version : 50505
+Source Host           : localhost:3306
 Source Database       : spider
 
 Target Server Type    : MYSQL
-Target Server Version : 50719
+Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-09-11 18:12:40
+Date: 2017-09-11 23:14:46
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -48,9 +48,9 @@ CREATE TABLE `dd_chapters` (
 -- ----------------------------
 DROP TABLE IF EXISTS `dd_contents`;
 CREATE TABLE `dd_contents` (
-  `chapter_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `content` longtext,
-  PRIMARY KEY (`chapter_id`)
+  `chapters_id` int(10) NOT NULL,
+  `content` longtext CHARACTER SET gbk,
+  PRIMARY KEY (`chapters_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPRESSED COMMENT='章节内容表';
 
 -- ----------------------------
@@ -64,13 +64,14 @@ CREATE TABLE `dd_novels` (
   `intro` text COMMENT '小说简介',
   `url` varchar(64) NOT NULL,
   `image_path` varchar(64) DEFAULT NULL,
-  `image_url` varchar(64) DEFAULT NULL COMMENT '小说封面图片',
+  `image_url` varchar(255) DEFAULT NULL COMMENT '小说封面图片',
   `category_name` varchar(32) DEFAULT NULL COMMENT '分类',
   `word_count` int(11) DEFAULT NULL,
   `status` varchar(16) DEFAULT NULL,
-  `update_at` varchar(32) DEFAULT NULL COMMENT '小说最后跟新时间',
+  `update_at` datetime DEFAULT NULL COMMENT '小说最后跟新时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `url_unique` (`url`),
   KEY `name_key` (`name`),
   KEY `author_key` (`author`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='小说表';
+

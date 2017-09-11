@@ -1,7 +1,6 @@
 const urlLib = require('url');
 const request = require('request');
 const iconv = require('iconv-lite')
-const { log } = require('../../utils/common');
 const Response = require('./response');
 const conf = require('../config');
 
@@ -19,6 +18,7 @@ class Spider {
         this.oldUrls = new Set();
         this.failedUrls = new Set();
         this.pipelines = [];
+
     }
 
     start() {
@@ -29,13 +29,12 @@ class Spider {
             let startTime = Date.now();
             request({ uri: url, timeout: 10000 , encoding: null }, (err, response, body) => {
                 let endTime = Date.now();
-                log.log(`GET=>${url}: ${endTime-startTime}ms`)
+                console.log(`GET=>${url}: ${endTime-startTime}ms`)
                 this.running--;
                 if (err) {
-                    log.error(`${url}=>${err}`);
-                    this.urls.set(url, item);
+                    console.error(`${url}: ${err}`);
                 } else if (response.statusCode !== 200) {
-                    log.error(`${url}=>statusCode=${response.statusCode}`);
+                    console.error(`${url}: statusCode=${response.statusCode}`);
                     this.failedUrls.add(url);
                 } else {
                     this.oldUrls.add(url);
@@ -68,7 +67,7 @@ class Spider {
             try {
                 item = await this.pipelines[i].process_item(item);
             } catch (e) {
-                log.error(`URL=>${item.url}: PipelineCode=>${i}: ERROR=>${e}`);
+                console.error(`${item.url}: PipelineCode=>${i}: ERROR=>${e}`);
             }
 
         }
