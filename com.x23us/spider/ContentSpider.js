@@ -27,7 +27,7 @@ class ContentSpider extends Spider {
             SELECT c.id, c.url FROM dd_chapters c
                 LEFT JOIN dd_contents n ON c.id = n.chapters_id
                 WHERE n.chapters_id IS NULL
-                LIMIT 100`;
+                LIMIT 10000`;
         let urls = await dbtool.query(sql);
         dbtool.end();
         urls = urls.map(url => {

@@ -4,7 +4,7 @@ const {Console} = require('console');
 require('dotenv').config({ path: path.resolve(__dirname, '..', '.env') });
 
 const imagedir = path.join(__dirname, 'images');
-const logdir = path.join(__dirname, 'logdir');
+const logdir = path.join(__dirname, 'log');
 if (!fs.existsSync(imagedir)) fs.mkdirSync(imagedir);
 if (!fs.existsSync(logdir)) fs.mkdirSync(logdir);
 

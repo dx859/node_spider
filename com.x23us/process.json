@@ -1,0 +1,29 @@
+{
+    "apps": [
+    {
+        "name": "dingdian",
+        "script": "main.js",
+        "watch": false,
+        "autorestart": false,
+        "error_file": "log/err.log",
+        "out_file": "log/out.log",
+        "log_date_format": "YYYY-MM-DD HH:mm Z",
+        "env":
+        {
+            "NODE_ENV": "development"
+        },
+        "env_production":
+        {
+            "NODE_ENV": "production"
+        }
+    }, {
+        "name": "ddconent",
+        "script": "spider/ContentSpider.js",
+        "watch": false,
+        "autorestart": false,
+        "error_file": "log/err-con.log",
+        "out_file": "log/out-con.log",
+        "log_date_format": "YYYY-MM-DD HH:mm Z",
+    }],
+
+}
