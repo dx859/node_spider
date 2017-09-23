@@ -5,7 +5,7 @@ const asyncLibs = require('async')
 const log = console.log.bind(console)
 
 function concatTest() {
-    let dir1 = path.join(__dirname, '../test')
+    let dir1 = path.join(__dirname, '../utils')
     dir2 = path.join(__dirname, '../novel')
     dir3 = path.join(__dirname, '../libs')
     dir4 = path.join(__dirname, '../git_login')
